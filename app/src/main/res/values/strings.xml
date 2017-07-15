@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">DaggerMVPRx Architecture</string>
+    <string name="txt_please_wait">Please wait...</string>
+</resources>
