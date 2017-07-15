@@ -1,1 +1,2 @@
-"This is the README" 
+# AndroidDaggerMVPRxArchitecture
+Basic Android Architecture using dagger mvp and rxjava
