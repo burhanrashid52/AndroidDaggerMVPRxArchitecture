@@ -1,6 +1,14 @@
 # AndroidDaggerMVPRxArchitecture
 Basic Android Architecture using dagger mvp and rxjava
 
+
+## What we will be Learning?
+  - Use dagger2 with Retrofit, OkHttp, Gson and RxJava and RxAndroid
+  - Use Model View Presenter(MVP) Architecture to decouple the Business logic and the underlying implementation of the logic to produce more cleaner code
+  - Use RxJava to make request to our REST API
+  - Use Retrofit to make call to a API and display the result
+  - Learn about dependent components in dagger and creating custom scope for dependent components
+
 ## License
 Copyright 2018 Burhanuddin Rashid
 
