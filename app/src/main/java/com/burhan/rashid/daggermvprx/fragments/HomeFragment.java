@@ -11,12 +11,10 @@ import android.widget.ListView;
 import com.burhan.rashid.daggermvprx.App;
 import com.burhan.rashid.daggermvprx.R;
 import com.burhan.rashid.daggermvprx.contracter.HomeScreenContract;
-import com.burhan.rashid.daggermvprx.data.module.BaseFragmentScreenModule;
-import com.burhan.rashid.daggermvprx.models.Post;
 import com.burhan.rashid.daggermvprx.data.base.BaseFragments;
 import com.burhan.rashid.daggermvprx.data.base.BasePresenter;
 import com.burhan.rashid.daggermvprx.data.component.DaggerBaseFragmentScreenComponent;
-import com.burhan.rashid.daggermvprx.data.module.BaseActivityScreenModule;
+import com.burhan.rashid.daggermvprx.models.Post;
 import com.burhan.rashid.daggermvprx.presenters.HomeScreenPresenter;
 
 import java.util.ArrayList;
@@ -61,8 +59,9 @@ public class HomeFragment extends BaseFragments implements HomeScreenContract.Vi
         list = new ArrayList<>();
         DaggerBaseFragmentScreenComponent.builder()
                 .netComponent(App.getInstance().getNetComponent())
-                .baseFragmentScreenModule(new BaseFragmentScreenModule(this))
-                .build().inject(this);
+                .createHomeView(this)
+                .build()
+                .inject(this);
     }
 
     @Nullable
