@@ -24,8 +24,6 @@ public interface NetComponent {
     interface Builder {
         NetComponent build();
 
-        Builder netModule(NetModule netModule);
-
         @BindsInstance
         Builder application(Application application);
     }
