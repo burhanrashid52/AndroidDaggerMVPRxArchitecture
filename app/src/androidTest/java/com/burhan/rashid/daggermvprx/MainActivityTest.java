@@ -7,7 +7,7 @@ import android.support.test.filters.SmallTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.burhan.rashid.daggermvprx.mainscreen.MainActivity;
+import com.burhan.rashid.daggermvprx.activities.MainActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -28,7 +28,7 @@ public class MainActivityTest {
 
     @Test
     public void checkRecyclerView() throws Exception {
-        Espresso.registerIdlingResources(mainActivityActivityTestRule.getActivity().getCountingIdlingResource());
+        // Espresso.registerIdlingResources(mainActivityActivityTestRule.getActivity().getCountingIdlingResource());
         Espresso.onView(ViewMatchers.withId(R.id.my_list)).perform(ViewActions.click());
     }
 }

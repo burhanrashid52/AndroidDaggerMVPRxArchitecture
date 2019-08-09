@@ -4,7 +4,6 @@ import android.app.Application;
 
 import com.burhan.rashid.daggermvprx.data.component.DaggerNetComponent;
 import com.burhan.rashid.daggermvprx.data.component.NetComponent;
-import com.burhan.rashid.daggermvprx.data.module.AppModule;
 import com.burhan.rashid.daggermvprx.util.PrefUtils;
 
 import io.realm.Realm;
@@ -32,7 +31,7 @@ public class App extends Application {
         //Initialize Dagger Net Component
         //Here
         mNetComponent = DaggerNetComponent.builder()
-                .appModule(new AppModule(this))
+                .application(this)
                 .build();
     }
 
