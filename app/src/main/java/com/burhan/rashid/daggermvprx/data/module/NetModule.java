@@ -15,6 +15,7 @@ import com.google.gson.GsonBuilder;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Named;
+import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
@@ -30,17 +31,17 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 @Module
 public class NetModule {
-    private String mBaseUrl = ApiConstants.BASE_URL;
+    private static String mBaseUrl = ApiConstants.BASE_URL;
 
     @Provides
     @NetworkScope
-    SharedPreferences providesSharedPreferences(Application application) {
+    static SharedPreferences providesSharedPreferences(Application application) {
         return PreferenceManager.getDefaultSharedPreferences(application);
     }
 
     @Provides
     @NetworkScope
-    Cache provideHttpCache(Application application) {
+    static Cache provideHttpCache(Application application) {
         int cacheSize = 10 * 1024 * 1024;
         Cache cache = new Cache(application.getCacheDir(), cacheSize);
         return cache;
@@ -48,7 +49,7 @@ public class NetModule {
 
     @Provides
     @NetworkScope
-    Gson provideGson() {
+    static Gson provideGson() {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES);
         return gsonBuilder.create();
@@ -57,7 +58,7 @@ public class NetModule {
     @Provides
     @NetworkScope
     @Named("refresh_client")
-    OkHttpClient provideOkhttpClientRefresh(@Named("api_refresh") Retrofit retrofit, Cache cache, HttpLoggingInterceptor interceptor) {
+    static OkHttpClient provideOkhttpClientRefresh(@Named("api_refresh") Retrofit retrofit, Cache cache, HttpLoggingInterceptor interceptor) {
         SignedRequestInterceptor signedRequestInterceptor = new SignedRequestInterceptor(retrofit);
         OkHttpClient.Builder client = new OkHttpClient.Builder()
                 .connectTimeout(ApiConstants.HTTP_CONNECT_TIMEOUT, TimeUnit.MILLISECONDS)
@@ -71,7 +72,7 @@ public class NetModule {
     @Provides
     @NetworkScope
     @Named("client")
-    OkHttpClient provideOkhttpClient(Cache cache, HttpLoggingInterceptor interceptor) {
+    static OkHttpClient provideOkhttpClient(Cache cache, HttpLoggingInterceptor interceptor) {
         OkHttpClient.Builder client = new OkHttpClient.Builder()
                 .connectTimeout(ApiConstants.HTTP_CONNECT_TIMEOUT, TimeUnit.MILLISECONDS)
                 .readTimeout(ApiConstants.HTTP_READ_TIMEOUT, TimeUnit.MILLISECONDS)
@@ -83,7 +84,7 @@ public class NetModule {
     @Provides
     @NetworkScope
     @Named("api_call")
-    Retrofit provideRetrofit(Gson gson, @Named("client") OkHttpClient okHttpClient) {
+    static Retrofit provideRetrofit(Gson gson, @Named("client") OkHttpClient okHttpClient) {
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
@@ -96,7 +97,7 @@ public class NetModule {
     @Provides
     @NetworkScope
     @Named("api_refresh")
-    Retrofit provideRetrofitForApiRefresh(Gson gson) {
+    static Retrofit provideRetrofitForApiRefresh(Gson gson) {
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
@@ -107,7 +108,7 @@ public class NetModule {
 
     @Provides
     @NetworkScope
-    HttpLoggingInterceptor provideHttpLoggingInterceptor() {
+    static HttpLoggingInterceptor provideHttpLoggingInterceptor() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         return interceptor;
@@ -115,7 +116,7 @@ public class NetModule {
 
     @Provides
     @NetworkScope
-    ApiService provideApiService(@Named("api_call") Retrofit retrofit) {
+    static ApiService provideApiService(@Named("api_call") Retrofit retrofit) {
         return retrofit.create(ApiService.class);
     }
 }

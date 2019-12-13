@@ -11,7 +11,7 @@ import dagger.Component;
  * Created by Burhanuddin Rashid on 11-May-16.
  */
 @AppScope
-@Component(dependencies = NetComponent.class)
+@Component(dependencies = NetComponent.class, modules = BaseActivityModule.class)
 public interface BaseActivityScreenComponent {
 
     void inject(MainActivity mainActivity);

@@ -15,7 +15,6 @@ import com.burhan.rashid.daggermvprx.data.base.BaseFragments;
 import com.burhan.rashid.daggermvprx.data.base.BasePresenter;
 import com.burhan.rashid.daggermvprx.data.component.DaggerBaseFragmentScreenComponent;
 import com.burhan.rashid.daggermvprx.models.Post;
-import com.burhan.rashid.daggermvprx.presenters.HomeScreenPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +50,7 @@ public class HomeFragment extends BaseFragments implements HomeScreenContract.Vi
     }
 
     @Inject
-    HomeScreenPresenter mHomeScreenPresenter;
+    HomeScreenContract.Presenter mHomeScreenPresenter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

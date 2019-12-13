@@ -9,7 +9,6 @@ import com.burhan.rashid.daggermvprx.contracter.MainScreenContract;
 import com.burhan.rashid.daggermvprx.data.base.BaseActivity;
 import com.burhan.rashid.daggermvprx.data.component.DaggerBaseActivityScreenComponent;
 import com.burhan.rashid.daggermvprx.fragments.HomeFragment;
-import com.burhan.rashid.daggermvprx.presenters.MainScreenPresenter;
 import com.burhan.rashid.daggermvprx.util.ActivityUtils;
 
 import javax.inject.Inject;
@@ -20,7 +19,7 @@ import butterknife.ButterKnife;
 public class MainActivity extends BaseActivity implements MainScreenContract.View {
 
     @Inject
-    MainScreenPresenter mainPresenter;
+    MainScreenContract.Presenter mainPresenter;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
